@@ -25,6 +25,23 @@
 ### Prerequisites
 - [Nix](https://nixos.org/download.html) with flakes enabled
 - [Podman](https://podman.io/getting-started/installation) (or Docker as fallback) - *for deployment only, not required for development*
+- Optional: [nix-direnv](https://github.com/nix-community/nix-direnv) for automatic environment loading
+
+### Development Environment
+
+#### Using direnv (if nix-direnv is installed):
+```bash
+# Enter the directory - environment loads automatically
+cd my-project
+```
+
+#### Using nix develop (fallback/recommended):
+```bash
+# Enter the Nix development environment manually
+nix develop
+```
+
+The `nix develop` command is the most reliable way to enter the development environment and provides the complete setup with Node.js, pnpm, Git, cowsay, and figlet with the welcome message.
 
 ### Using the Template
 
