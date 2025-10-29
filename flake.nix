@@ -25,7 +25,6 @@
             cowsay
             figlet
             git
-            podman
           ];
 
           # Set environment variables

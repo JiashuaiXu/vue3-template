@@ -24,7 +24,7 @@
 
 ### Prerequisites
 - [Nix](https://nixos.org/download.html) with flakes enabled
-- [Podman](https://podman.io/getting-started/installation) (or Docker as fallback)
+- [Podman](https://podman.io/getting-started/installation) (or Docker as fallback) - *for deployment only, not required for development*
 
 ### Using the Template
 
@@ -93,6 +93,26 @@ pnpm build
 podman build -f podman/Containerfile -t my-app .
 podman run -p 8080:80 my-app
 ```
+
+### Using Podman Compose for Container Orchestration
+
+For more complex deployments, you can use the provided `podman-compose.yml`:
+
+```bash
+# Install podman-compose if you don't have it
+pip install podman-compose  # or install via your package manager
+
+# Build and start services
+podman-compose -f podman-compose.yml up --build
+
+# Stop services
+podman-compose -f podman-compose.yml down
+```
+
+The podman-compose setup includes:
+- Production service for the built Vue application
+- Development proxy for hot-reloading during development
+- Development server container
 
 The container uses:
 - Multi-stage build for optimized image size

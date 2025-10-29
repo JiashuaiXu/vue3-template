@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  vue3-app:
+    build:
+      context: ./template
+      dockerfile: podman/Containerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./template/dist:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+  # Optional: Add a development proxy for hot-reloading during development
+  dev-proxy:
+    image: nginx:alpine
+    ports:
+      - "3000:80"
+    volumes:
+      - ./template/nginx-dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - vue3-dev-server
+    restart: unless-stopped
+
+  vue3-dev-server:
+    build:
+      context: ./template
+      dockerfile: podman/DevContainerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./template:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    command: sh -c "pnpm install && pnpm dev --host 0.0.0.0"
+    restart: unless-stopped

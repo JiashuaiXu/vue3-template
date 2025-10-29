@@ -1,0 +1,23 @@
+# Development container for Vue 3 app (to be used with podman-compose)
+FROM node:22-alpine
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy source code
+COPY . .
+
+# Expose port for Vite dev server
+EXPOSE 5173
+
+# Start the development server
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]
