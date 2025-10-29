@@ -23,6 +23,7 @@
             nodejs
             pnpm
             cowsay
+            figlet
             git
             podman
           ];
