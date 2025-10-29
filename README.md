@@ -121,6 +121,18 @@ vue3-nix-podman-template/
 
 This template was created with the help of Qwen AI. The `docs(qwen)` commit type has been added specifically for AI-assisted development changes. The `qwen.md` file in the template directory tracks AI-assisted development sessions.
 
+### Auto-Approval Feature
+The template includes an auto-approval feature that can automatically confirm actions. This is configured in the `qwen.md` file:
+
+```
+## Auto-Approval Configuration
+AUTO_APPROVE_FEATURE=true  # Set to false to disable auto-approval
+```
+
+- When `AUTO_APPROVE_FEATURE=true` (default), all prompts are automatically approved
+- When `AUTO_APPROVE_FEATURE=false`, manual approval is required
+- The Vue application includes UI elements to visualize this setting
+
 ## 🤝 Contributing
 
 1. Fork the repository

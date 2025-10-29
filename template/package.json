@@ -1,14 +1,15 @@
 {
   "name": "vue3-nix-podman-template",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "qwen-config": "node src/qwen-config.js"
   },
   "dependencies": {
     "vue": "^3.4.21"

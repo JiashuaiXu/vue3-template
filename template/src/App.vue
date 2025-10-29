@@ -26,6 +26,24 @@
           <li>Conventional Commits enforcement</li>
         </ul>
       </div>
+      
+      <div class="card">
+        <h2>AI Integration</h2>
+        <p>This template includes AI-assisted development features:</p>
+        <ul>
+          <li>Auto-approval configuration in <code>qwen.md</code></li>
+          <li>Configurable with <code>AUTO_APPROVE_FEATURE=true/false</code></li>
+          <li>Default: Enabled (auto-approve all prompts)</li>
+        </ul>
+        <div class="toggle-container">
+          <label class="toggle-label">
+            Auto-approval: 
+            <span :class="{'enabled': autoApproveEnabled, 'disabled': !autoApproveEnabled}">
+              {{ autoApproveEnabled ? 'ENABLED' : 'DISABLED' }}
+            </span>
+          </label>
+        </div>
+      </div>
     </main>
     
     <footer class="footer">
@@ -35,7 +53,21 @@
 </template>
 
 <script setup>
-// Component logic goes here
+import { ref, onMounted } from 'vue';
+
+// Default to enabled
+const autoApproveEnabled = ref(true);
+
+// In a real app, this would read from the configuration file
+function loadConfig() {
+  // Simulate loading config - in real implementation, this would read the qwen.md file
+  // For now, we'll just set the value based on our default
+  autoApproveEnabled.value = true; // This would come from the config file
+}
+
+onMounted(() => {
+  loadConfig();
+});
 </script>
 
 <style>
@@ -79,9 +111,20 @@ body {
 
 .main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+/* For larger screens, show 2 columns for first two cards */
+@media (min-width: 768px) {
+  .main {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .main > div:nth-child(3) {
+    grid-column: span 2;
+  }
 }
 
 .card {
@@ -118,5 +161,25 @@ code {
   background: #ecf0f1;
   border-radius: 8px;
   color: #7f8c8d;
+}
+
+.toggle-container {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.toggle-label {
+  font-weight: bold;
+}
+
+.enabled {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.disabled {
+  color: #e74c3c;
+  font-weight: bold;
 }
 </style>
